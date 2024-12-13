@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/styles/todo.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Add Todo / Edit Todo form -->
+    <div class="add-todos">
+      <form action="/todos/add" method="POST" id="todo-form">
+        <h1>Enter Todo</h1>
+        <input type="text" name="title" id="title" placeholder="Enter title" required>
+        <textarea name="description" id="description" placeholder="Enter description" rows="3" required></textarea>
+        <button type="submit" id="submit-btn">Add Todo</button>
+      </form>
+    </div>
+
+    <!-- Todo Cards -->
+    <div class="todos">
+      <% if (todos && todos.length > 0) { %>
+        <% todos.forEach(todo => { %>
+          <div class="card" id="todo-<%= todo.id %>">
+            <div>
+              <h3><%= todo.title %></h3>
+              <p><%= todo.description %></p>
+            </div>
+            <div>
+              <!-- Edit Todo Button -->
+              <button class="edit-btn" onclick="editTodo('<%= todo.id %>', '<%= todo.title %>', '<%= todo.description %>')">Edit</button>
+              <!-- Delete Todo Button -->
+              <button class="delete-btn" onclick="deleteTodo('<%= todo.id %>')">Delete</button>
+              <!-- Mark as Done Button -->
+              <button class="done-btn" onclick="markAsDone('<%= todo.id %>')">Mark As Done</button>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p class="no-todos">No todos available.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <script>
+    function editTodo(id, title, description) {
+      const form = document.getElementById('todo-form');
+      form.action = `/todos/edit/${id}`;  
+      document.getElementById('title').value = title;  
+      document.getElementById('description').value = description;  
+      document.getElementById('submit-btn').textContent = 'Save Changes';  
+    }
+
+    function deleteTodo(id) {
+      if (confirm('Apakah Anda yakin ingin menghapus todo ini?')) {
+        fetch(`/todos/delete/${id}`, {
+          method: 'DELETE',
+        })
+        .then(response => {
+          if (response.ok) {
+            // Hapus todo dari halaman jika berhasil
+            document.getElementById(`todo-${id}`).remove();
+          } else {
+            alert('Gagal menghapus todo.');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan saat menghapus todo.');
+        });
+      }
+    }
+
+    function markAsDone(id) {
+      const card = document.getElementById(`todo-${id}`);
+      card.classList.toggle('done');  // Toggle the 'done' class to mark it as done
+    }
+  </script>
+</body>
+</html>

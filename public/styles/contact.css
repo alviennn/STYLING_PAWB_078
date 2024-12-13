@@ -1,0 +1,163 @@
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      padding-top: 70px; /* Offset for navbar */
+    }
+
+    /* Navbar Styles */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #2575fc;
+    }
+
+    /* Main Content */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: #2575fc;
+    }
+
+    /* Contact Form Card */
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      margin-bottom: 40px;
+    }
+
+    /* Information Message */
+    .info-message {
+      background-color: #f0f0f0;
+      color: #333;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .form-container input,
+    .form-container textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-container button {
+      padding: 12px 24px;
+      background-color: #2575fc;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    .form-container button:hover {
+      background-color: #6a11cb;
+    }
+
+    /* Message Cards */
+    .messages {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .message-card {
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .message-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .message-card p {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .message-card span {
+      font-size: 1rem;
+      color: #999;
+    }
+
+    .no-messages {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-top: 20px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .message-card {
+        width: 100%;
+      }
+
+      .form-container {
+        padding: 20px;
+      }
+    }

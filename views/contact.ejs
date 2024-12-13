@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Page</title>
+  <link rel="stylesheet" href="/styles/contact.css">
+  <script>
+    function showMessage(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const name = document.querySelector('input[name="name"]').value;
+      const email = document.querySelector('input[name="email"]').value;
+      const message = document.querySelector('textarea[name="message"]').value;
+
+      // Display the input as an alert
+      alert(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+
+      // Optionally, clear the form inputs
+      document.querySelector('form').reset();
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Form Container with Title and Info Message -->
+    <div class="form-container">
+      <h1>Contact Page</h1>
+      <div class="info-message">
+        <p>Thank you for visiting our contact page. Please send us a message using the form below, and we will get back to you as soon as possible.</p>
+      </div>
+      <form onsubmit="showMessage(event)">
+        <input type="text" name="name" placeholder="Enter your name" required>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <textarea name="message" placeholder="Enter your message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

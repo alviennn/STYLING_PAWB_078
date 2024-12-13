@@ -1,0 +1,71 @@
+/* CSS untuk halaman register */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+    }
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      color: #333;
+    }
+    .container img {
+      height: 150px;
+      margin-bottom: 20px;
+    }
+    .container h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .container form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .container input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .container input:focus {
+      border-color: #2575fc;
+      box-shadow: 0 0 8px rgba(37, 117, 252, 0.5);
+      outline: none;
+    }
+    .container button {
+      padding: 12px;
+      background-color: #2575fc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .container button:hover {
+      background-color: #6a11cb;
+    }
+    .container a {
+      margin-top: 15px;
+      color: #2575fc;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .container a:hover {
+      text-decoration: underline;
+    }
