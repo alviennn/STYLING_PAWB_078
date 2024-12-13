@@ -27,17 +27,6 @@ const addTodos = (req, res) => {
     });
 }
 
-const markTodoAsDone = (req, res) => {
-    const { id } = req.params;
-    const query = "UPDATE todos SET is_done = 1 WHERE id = ?";
-    db.query(query, [id], (err, result) => {
-        if (err) {
-            return res.status(500).send({ error: 'Database error', details: err });
-        }
-        res.redirect('/todos');
-    });
-}
-
 const editTodos = (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
@@ -76,7 +65,6 @@ module.exports = {
     getTodos,
     addTodos,
     editTodos,
-    markTodoAsDone,
     deleteTodos,
     HalamannTodos
 };
