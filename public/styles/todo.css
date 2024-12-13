@@ -1,142 +1,254 @@
-/* CSS for the todo app */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #fff;
-    }
-    header {
-      background: #333;
-      padding: 10px;
-      text-align: center;
-      color: #fff;
-    }
-    .container {
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #2575fc;
-    }
-    .add-todos form {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .add-todos input,
-    .add-todos textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-      width: 100%;
-    }
-    .add-todos button {
-      padding: 10px 20px;
-      background-color: #2575fc;
-      color: #fff;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.3s;
-    }
-    .add-todos button:hover {
-      background-color: #6a11cb;
-    }
-    .todos {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .card {
-      background: #fff;
-      color: #333;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      width: calc(33.333% - 20px);
-      box-sizing: border-box;
-      transition: background-color 0.3s ease;
-    }
-    /* Hover Effect for Card */
-.card:hover {
-  transform: translateY(-5px); /* Slightly lifts the card */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Adds a more pronounced shadow */
-  background-color: #f9f9f9; /* Lightens the background */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+/* Global Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
 }
 
-    .card.done {
-      background-color: #e0ffe0; /* Light green background for completed todos */
-    }
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-    .card p {
-      font-size: 1rem;
-      margin-bottom: 10px;
-    }
-    .card button {
-      padding: 8px 16px;
-      background-color: #2575fc;
-      color: #fff;
-      border-radius: 5px;
-      font-weight: bold;
-      border: none;
-      transition: background-color 0.3s;
-    }
-    .card button:hover {
-      background-color: #6a11cb;
-    }
-    .card form {
-      display: inline;
-      margin-right: 10px;
-    }
-    .no-todos {
-      text-align: center;
-      font-size: 1.2rem;
-      color: #fff;
-    }
-    .edit-form {
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
-      width: 100%;
-    }
-    .edit-form input,
-    .edit-form textarea {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-      width: 100%;
-    }
-    .edit-form button {
-      padding: 10px 20px;
-      background-color: #2575fc;
-      color: #fff;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.3s;
-      align-self: flex-start;
-      margin-top: 10px;
-    }
-    .edit-form button:hover {
-      background-color: #6a11cb;
-    }
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Button Styling */
+.add-todo-btn {
+  padding: 12px 25px;
+  background-color: #2575fc;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s, transform 0.3s;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.add-todo-btn:hover {
+  background-color: #6a11cb;
+  transform: translateY(-3px);
+}
+
+/* Todo Cards Container */
+.todo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+}
+
+/* Card Styling */
+.card {
+  background: #fff;
+  color: #333;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-header {
+  background-color: #2575fc;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.card-footer button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.card-footer button.edit-btn {
+  background-color: #6a11cb;
+  color: #fff;
+}
+
+.card-footer button.edit-btn:hover {
+  background-color: #2575fc;
+}
+
+.card-footer button.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.card-footer button.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.card-footer button.done-btn {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.card-footer button.done-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Form Styling */
+#todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+#todo-form h1 {
+  color: #2575fc; 
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+#todo-form input,
+#todo-form textarea {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+#todo-form input:focus,
+#todo-form textarea:focus {
+  border-color: #2575fc;
+  outline: none;
+}
+
+/* Submit Button Styling */
+#submit-btn {
+  padding: 12px 25px;
+  background-color: #2575fc;
+  color: #fff;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#submit-btn:hover {
+  background-color: #6a11cb;
+  transform: translateY(-3px);
+}
+
+/* Close Button Styling */
+.close-btn {
+  color: #aaa;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #2575fc;
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Mark as Done Styling */
+.card.done {
+  background-color: #e8f5e9;
+  border-left: 5px solid #4caf50;
+}
+
+.card.done .card-header {
+  background-color: #81c784;
+}
+
+.card.done .card-footer button.done-btn {
+  background-color: #2e7d32;
+}
+
+.card.done .card-footer button.done-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  .todo-cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .todo-cards {
+    grid-template-columns: 1fr; /* 1 card per row */
+  }
+}

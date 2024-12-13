@@ -4,40 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Todo List</title>
-  <link rel="stylesheet" href="/styles/todo.css">
+  <link rel="stylesheet" href="styles/todo.css">
 </head>
 <body>
 
   <div class="container">
-    <!-- Add Todo / Edit Todo form -->
-    <div class="add-todos">
-      <form action="/todos/add" method="POST" id="todo-form">
-        <h1>Enter Todo</h1>
-        <input type="text" name="title" id="title" placeholder="Enter title" required>
-        <textarea name="description" id="description" placeholder="Enter description" rows="3" required></textarea>
-        <button type="submit" id="submit-btn">Add Todo</button>
-      </form>
+    <!-- Add Todo Button -->
+    <button class="add-todo-btn" onclick="openModal()">Add Todo</button>
+
+    <!-- Modal for Add/Edit Todo -->
+    <div id="todoModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <form action="/todos/add" method="POST" id="todo-form">
+          <h1>Enter Todo</h1>
+          <input type="text" name="title" id="title" placeholder="Enter title" required>
+          <textarea name="description" id="description" placeholder="Enter description" rows="3" required></textarea>
+          <button type="submit" id="submit-btn">Add Todo</button>
+        </form>
+      </div>
     </div>
 
     <!-- Todo Cards -->
     <div class="todos">
       <% if (todos && todos.length > 0) { %>
-        <% todos.forEach(todo => { %>
-          <div class="card" id="todo-<%= todo.id %>">
-            <div>
-              <h3><%= todo.title %></h3>
-              <p><%= todo.description %></p>
+        <div class="todo-cards">
+          <% todos.forEach(todo => { %>
+            <div class="card" id="todo-<%= todo.id %>">
+              <div class="card-header">
+                <h3><%= todo.title %></h3>
+              </div>
+              <div class="card-body">
+                <p><%= todo.description %></p>
+              </div>
+              <div class="card-footer">
+                <button class="edit-btn" onclick="editTodo('<%= todo.id %>', '<%= todo.title %>', '<%= todo.description %>')">Edit</button>
+                <form action="/todos/delete/<%= todo.id %>" method="POST" style="display: inline;">
+                  <button class="delete-btn" type="submit">Delete</button>
+                </form>
+                <button class="done-btn" onclick="markAsDone('<%= todo.id %>')">Mark As Done</button>
+              </div>
             </div>
-            <div>
-              <!-- Edit Todo Button -->
-              <button class="edit-btn" onclick="editTodo('<%= todo.id %>', '<%= todo.title %>', '<%= todo.description %>')">Edit</button>
-              <!-- Delete Todo Button -->
-              <button class="delete-btn" onclick="deleteTodo('<%= todo.id %>')">Delete</button>
-              <!-- Mark as Done Button -->
-              <button class="done-btn" onclick="markAsDone('<%= todo.id %>')">Mark As Done</button>
-            </div>
-          </div>
-        <% }); %>
+          <% }); %>
+        </div>
       <% } else { %>
         <p class="no-todos">No todos available.</p>
       <% } %>
@@ -45,37 +54,33 @@
   </div>
 
   <script>
+    // Function to open the modal
+    function openModal() {
+      document.getElementById('todoModal').style.display = 'block';
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('todoModal').style.display = 'none';
+      document.getElementById('todo-form').reset(); // Reset form fields
+      document.getElementById('submit-btn').textContent = 'Add Todo'; // Reset button text
+      document.getElementById('todo-form').action = '/todos/add'; // Reset form action
+    }
+
+    // Function to edit Todo (opens modal with pre-filled data)
     function editTodo(id, title, description) {
       const form = document.getElementById('todo-form');
-      form.action = `/todos/edit/${id}`;  
-      document.getElementById('title').value = title;  
-      document.getElementById('description').value = description;  
-      document.getElementById('submit-btn').textContent = 'Save Changes';  
+      form.action = `/todos/edit/${id}`;
+      document.getElementById('title').value = title;
+      document.getElementById('description').value = description;
+      document.getElementById('submit-btn').textContent = 'Save Changes';
+      openModal(); // Open modal when editing
     }
 
-    function deleteTodo(id) {
-      if (confirm('Apakah Anda yakin ingin menghapus todo ini?')) {
-        fetch(`/todos/delete/${id}`, {
-          method: 'DELETE',
-        })
-        .then(response => {
-          if (response.ok) {
-            // Hapus todo dari halaman jika berhasil
-            document.getElementById(`todo-${id}`).remove();
-          } else {
-            alert('Gagal menghapus todo.');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Terjadi kesalahan saat menghapus todo.');
-        });
-      }
-    }
-
+    // Function to mark Todo as done
     function markAsDone(id) {
       const card = document.getElementById(`todo-${id}`);
-      card.classList.toggle('done');  
+      card.classList.toggle('done');
     }
   </script>
 </body>
