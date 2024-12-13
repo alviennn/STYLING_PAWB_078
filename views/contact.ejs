@@ -7,23 +7,20 @@
   <link rel="stylesheet" href="/styles/contact.css">
   <script>
     function showMessage(event) {
-      event.preventDefault(); // Prevent form submission
+      event.preventDefault(); 
 
       const name = document.querySelector('input[name="name"]').value;
       const email = document.querySelector('input[name="email"]').value;
       const message = document.querySelector('textarea[name="message"]').value;
 
-      // Display the input as an alert
       alert(`Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
 
-      // Optionally, clear the form inputs
       document.querySelector('form').reset();
     }
   </script>
 </head>
 <body>
   <div class="container">
-    <!-- Form Container with Title and Info Message -->
     <div class="form-container">
       <h1>Contact Page</h1>
       <div class="info-message">
